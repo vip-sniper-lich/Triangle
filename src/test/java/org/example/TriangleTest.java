@@ -1,5 +1,6 @@
 package org.example;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -9,7 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class TriangleTest {
 
     // Тесты конструктора
-    @ParameterizedTest(name = "Valid triangle with sides {0}, {1}, {2}")
+    @DisplayName("Тестирование создания валидных треугольников")
+    @ParameterizedTest(name = "Валидный треугольник со сторонами {0}, {1}, {2}")
     @CsvSource({
             "3, 4, 5",
             "5, 5, 5",
@@ -25,7 +27,8 @@ class TriangleTest {
         );
     }
 
-    @ParameterizedTest(name = "Invalid triangle with sides {0}, {1}, {2}")
+    @DisplayName("Тестирование создания невалидных треугольников")
+    @ParameterizedTest(name = "Невалидный треугольник со сторонами {0}, {1}, {2}")
     @CsvSource({
             "1, 2, 3",
             "0, 4, 5",
@@ -37,7 +40,8 @@ class TriangleTest {
     }
 
     // Тесты сеттеров
-    @ParameterizedTest(name = "Set side A to {1} in triangle {0}, {2}, {3}")
+    @DisplayName("Тестирование валидного изменения стороны A")
+    @ParameterizedTest(name = "Изменение стороны A на {1} в треугольнике {0}, {2}, {3}")
     @CsvSource({
             "3, 4, 4, 5",
             "5, 6, 5, 8"
@@ -48,7 +52,8 @@ class TriangleTest {
         assertEquals(newA, triangle.getA());
     }
 
-    @ParameterizedTest(name = "Set invalid side A to {1} in triangle {0}, {2}, {3}")
+    @DisplayName("Тестирование невалидного изменения стороны A")
+    @ParameterizedTest(name = "Попытка установить недопустимое значение стороны A: {1} в треугольнике {0}, {2}, {3}")
     @CsvSource({
             "3, 10, 4, 5",
             "5, -1, 5, 8"
@@ -59,7 +64,8 @@ class TriangleTest {
     }
 
     // Тесты площади и периметра
-    @ParameterizedTest(name = "Triangle {0}, {1}, {2} has perimeter {3} and area ~{4}")
+    @DisplayName("Тестирование расчета периметра и площади")
+    @ParameterizedTest(name = "Треугольник {0}, {1}, {2} имеет периметр {3} и площадь ~{4}")
     @CsvSource({
             "3, 4, 5, 12, 6",
             "5, 5, 5, 15, 10.825",
@@ -71,8 +77,9 @@ class TriangleTest {
         assertEquals(expectedArea, triangle.square(), 0.001);
     }
 
-    // Тесты определения типа треугольника по сторонам
-    @ParameterizedTest(name = "Triangle {0}, {1}, {2} is {3}")
+    // Тесты определения типа треугольника
+    @DisplayName("Тестирование определения типа треугольника по сторонам")
+    @ParameterizedTest(name = "Треугольник {0}, {1}, {2} является {3}")
     @CsvSource({
             "5, 5, 5, 'равносторонний'",
             "5, 5, 8, 'равнобедренный'",
@@ -83,8 +90,8 @@ class TriangleTest {
         assertEquals(expectedType, triangle.getTypeBySides());
     }
 
-    // Тесты определения типа треугольника по углам
-    @ParameterizedTest(name = "Triangle {0}, {1}, {2} is {3} by angles")
+    @DisplayName("Тестирование определения типа треугольника по углам")
+    @ParameterizedTest(name = "Треугольник {0}, {1}, {2} является {3} по углам")
     @CsvSource({
             "3, 4, 5, 'прямоугольный'",
             "5, 5, 5, 'остроугольный'",
@@ -96,7 +103,8 @@ class TriangleTest {
     }
 
     // Тесты сравнения треугольников
-    @ParameterizedTest(name = "Triangles {0},{1},{2} and {3},{4},{5} are equal: {6}")
+    @DisplayName("Тестирование сравнения треугольников")
+    @ParameterizedTest(name = "Треугольники {0},{1},{2} и {3},{4},{5} равны: {6}")
     @CsvSource({
             "3, 4, 5, 3, 4, 5, true",
             "3, 4, 5, 4, 3, 5, true",
@@ -108,11 +116,12 @@ class TriangleTest {
         assertEquals(expected, t1.equals(t2));
     }
 
-    @ParameterizedTest(name = "Triangles {0},{1},{2} and {3},{4},{5} have equal area: {6}")
+    @DisplayName("Тестирование сравнения площадей треугольников")
+    @ParameterizedTest(name = "Треугольники {0},{1},{2} и {3},{4},{5} имеют равную площадь: {6}")
     @CsvSource({
             "3, 4, 5, 6, 8, 10, true",
             "5, 5, 5, 10, 10, 10, true",
-            "5, 5 , 5, 6, 8 ,10, false"
+            "5, 5, 5, 6, 8, 10, false"
     })
     void testEqualsArea(double a1, double b1, double c1, double a2, double b2, double c2, boolean expected) {
         Triangle t1 = new Triangle(a1, b1, c1);
@@ -121,7 +130,8 @@ class TriangleTest {
     }
 
     // Тесты высоты треугольника
-    @ParameterizedTest(name = "Height to side {3} in triangle {0},{1},{2} is ~{4}")
+    @DisplayName("Тестирование расчета высоты треугольника")
+    @ParameterizedTest(name = "Высота к стороне {3} в треугольнике {0},{1},{2} равна ~{4}")
     @CsvSource({
             "3, 4, 5, 3, 4",
             "5, 5, 5, 5, 4.330"
@@ -131,7 +141,8 @@ class TriangleTest {
         assertEquals(expectedHeight, triangle.calculateHeight(side), 0.001);
     }
 
-    @ParameterizedTest(name = "Invalid height calculation for side {3} in triangle {0},{1},{2}")
+    @DisplayName("Тестирование невалидного расчета высоты")
+    @ParameterizedTest(name = "Некорректный расчет высоты для стороны {3} в треугольнике {0},{1},{2}")
     @CsvSource({
             "3, 4, 5, 10",
             "5, 5, 5, -1"
@@ -142,7 +153,8 @@ class TriangleTest {
     }
 
     // Тест сортировки сторон
-    @ParameterizedTest(name = "Sort sides for triangle {0},{1},{2} -> {3},{4},{5}")
+    @DisplayName("Тестирование сортировки сторон треугольника")
+    @ParameterizedTest(name = "Сортировка сторон треугольника {0},{1},{2} -> {3},{4},{5}")
     @CsvSource({
             "3, 4, 5, 3, 4, 5",
             "5, 3, 4, 3, 4, 5",
@@ -159,6 +171,7 @@ class TriangleTest {
     }
 
     // Тест конструктора по умолчанию
+    @DisplayName("Тестирование конструктора по умолчанию")
     @Test
     void testDefaultConstructor() {
         Triangle triangle = new Triangle();

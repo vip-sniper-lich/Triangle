@@ -1,5 +1,6 @@
 package org.example;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -9,7 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BankCardTest {
 
-    @ParameterizedTest(name = "Card creation with number={0}, CSV={1}, serviceLife={2}")
+    @DisplayName("Тест базового конструктора банковской карты")
+    @ParameterizedTest(name = "Создание карты с номером={0}, CSV={1}, сроком действия={2}")
     @CsvSource({
             "'1234567812345678', '123', '12/25'",
             "'8765432187654321', '456', '06/23'",
@@ -26,7 +28,8 @@ class BankCardTest {
         assertNull(card.getScore());
     }
 
-    @ParameterizedTest(name = "Card creation with status={0}, number={1}, CSV={2}, serviceLife={3}")
+    @DisplayName("Тест конструктора банковской карты со статусом")
+    @ParameterizedTest(name = "Создание карты со статусом={0}, номером={1}, CSV={2}, сроком действия={3}")
     @CsvSource({
             "'active', '1234567812345678', '123', '12/25'",
             "'blocked', '8765432187654321', '456', '06/23'",
@@ -43,7 +46,8 @@ class BankCardTest {
         assertNull(card.getScore());
     }
 
-    @ParameterizedTest(name = "Pay with status={0}, score={1}, price={2}, expected={3}")
+    @DisplayName("Тест оплаты с карты")
+    @ParameterizedTest(name = "Оплата со статусом={0}, балансом={1}, ценой={2}, ожидаемый результат={3}")
     @CsvSource({
             "'active', '1000', '500', true",
             "'active', '200', '500', false",
@@ -61,7 +65,8 @@ class BankCardTest {
         }
     }
 
-    @ParameterizedTest(name = "Transfer from card with status={0}, score={1}, price={2}, to card with score={3}, expected={4}")
+    @DisplayName("Тест перевода между картами")
+    @ParameterizedTest(name = "Перевод с карты со статусом={0}, балансом={1}, суммой={2}, на карту с балансом={3}, ожидаемый результат={4}")
     @CsvSource({
             "'active', '1000', '500', '200', true",
             "'active', '200', '500', '100', false",
@@ -80,7 +85,8 @@ class BankCardTest {
         }
     }
 
-    @ParameterizedTest(name = "Replenish with status={0}, initialScore={1}, amount={2}, expected={3}")
+    @DisplayName("Тест пополнения карты")
+    @ParameterizedTest(name = "Пополнение со статусом={0}, начальным балансом={1}, суммой={2}, ожидаемый результат={3}")
     @CsvSource({
             "'active', '1000', '500', true",
             "'blocked', '1000', '500', false",
@@ -96,7 +102,7 @@ class BankCardTest {
         }
     }
 
-    // Тест на обработку неверного статуса
+    @DisplayName("Тест обработки неверного статуса карты")
     @Test
     void testStatusCardWithInvalidCode() {
         BankCard card = new BankCard("1000", "owner1", "active", "1234567812345678", "123", "12/25");

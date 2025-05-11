@@ -18,7 +18,7 @@ class CalculatorTest
             "-100000, 100000, 0",
             "999999999, 1, 1000000000"
     })
-    @DisplayName("Test addition")
+    @DisplayName("Тест на сложение")
     void testPlus(double first, double second, double expectedResult) {
         assertEquals(expectedResult, Calculator.plus(first, second),
                 () -> first + " + " + second + " should equal " + expectedResult);
@@ -29,7 +29,7 @@ class CalculatorTest
             "3.0, 2.0, 1.0",
             "-2.0, 1.0, -3.0"
     })
-    @DisplayName("Test subtraction")
+    @DisplayName("Тест на вычитание")
     void testMinus(double first, double second, double expectedResult) {
         assertEquals(expectedResult, Calculator.minus(first, second));
     }
@@ -39,7 +39,7 @@ class CalculatorTest
             "4.0, 2.0, 2.0",
             "4.0, 0.0, 0.0"  // Здесь ожидается исключение
     })
-    @DisplayName("Test division")
+    @DisplayName("Тест на деление")
     void testShare(double first, double second, double expectedResult) {
         if (second == 0.0) {
             assertThrows(IllegalArgumentException.class, () -> Calculator.share(first, second));
@@ -53,7 +53,7 @@ class CalculatorTest
             "2.0, 3.0, 6.0",
             "-2.0, 3.0, -6.0"
     })
-    @DisplayName("Test multiplication")
+    @DisplayName("Тест на умножение")
     void testMultiply(double first, double second, double expectedResult) {
         assertEquals(expectedResult, Calculator.multiply(first, second));
     }
@@ -78,7 +78,7 @@ class CalculatorTest
             "4.0, 2.0",
             "-1.0, 0.0"  // Здесь ожидается исключение
     })
-    @DisplayName("Test square root")
+    @DisplayName("Тест на квадратный корень")
     void testSqrt(double value, double expectedResult) {
         if (value < 0) {
             assertThrows(IllegalArgumentException.class, () -> Calculator.sqrt(value));
@@ -92,7 +92,7 @@ class CalculatorTest
             "-5.0, 5.0",
             "5.0, 5.0"
     })
-    @DisplayName("Test absolute value")
+    @DisplayName("Тест на модуль")
     void testAbs(double value, double expectedResult) {
         assertEquals(expectedResult, Calculator.abs(value));
     }
@@ -102,7 +102,7 @@ class CalculatorTest
             "2.0, 3, 8.0",
             "5.0, 0, 1.0"
     })
-    @DisplayName("Test power")
+    @DisplayName("Тест на возведение в степень")
     void testPow(double base, int exponent, double expectedResult) {
         assertEquals(expectedResult, Calculator.pow(base, exponent));
     }
@@ -112,7 +112,7 @@ class CalculatorTest
             "50.0, 0.5",
             "100.0, 1.0"
     })
-    @DisplayName("Test percentages")
+    @DisplayName("Тест на проценты")
     void testPercentages(double percent, double expectedResult) {
         assertEquals(expectedResult, Calculator.percentages(percent));
     }
