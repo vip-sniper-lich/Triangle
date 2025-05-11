@@ -153,7 +153,37 @@ public class Triangle
 
     public boolean equalsArea(Triangle other)
     {
-        return Math.abs(this.square() - other.square()) < 1e-9; // Учитываем возможные погрешности
+        // Проверка на равенство (конгруэнтность)
+        if(areCongruent(this, other)) return true;
+        else if (areSimilar(this, other)) return true;
+        else return false;
+    }
+    public static boolean areCongruent(Triangle t1, Triangle t2) {
+        // Получаем стороны треугольников и сортируем их для сравнения
+        double[] sides1 = {t1.a, t1.b, t1.c};
+        double[] sides2 = {t2.a, t2.b, t2.c};
+        java.util.Arrays.sort(sides1);
+        java.util.Arrays.sort(sides2);
+
+        // Проверяем, все ли стороны равны
+        return sides1[0] == sides2[0] &&
+                sides1[1] == sides2[1] &&
+                sides1[2] == sides2[2];
+    }
+
+    // Проверка на подобие (пропорциональность сторон)
+    public static boolean areSimilar(Triangle t1, Triangle t2) {
+        // Получаем стороны треугольников и сортируем их
+        t1.sort();
+        t2.sort();
+        // Вычисляем коэффициенты пропорциональности
+        double ratio1 = t1.a / t2.a;
+        double ratio2 = t1.b / t2.b;
+        double ratio3 = t1.c / t2.c;
+
+        // Проверяем, одинаковы ли коэффициенты (с учетом погрешности double)
+        return Math.abs(ratio1 - ratio2) < 1e-9 &&
+                Math.abs(ratio1 - ratio3) < 1e-9;
     }
 
     public double calculateHeight(double side)

@@ -41,11 +41,11 @@ public class BankCard
     }
     public boolean pay (String price)
     {
-        if (!status.equals("overdue") || !status.equals("blocked"))
+        if(!status.equals("overdue") && !status.equals("blocked") && !status.equals("unopened"))
         {
             if (Integer.parseInt(price) > Integer.parseInt(score))
             {
-                System.out.println("У вас не достаточно средст");
+                System.out.println("У вас не достаточно средств");
                 return false;
             }
             else
@@ -62,7 +62,7 @@ public class BankCard
     public boolean transfer (String price, BankCard card)
     {
 
-        if (!status.equals("overdue") || !status.equals("blocked"))
+        if(!status.equals("overdue") && !status.equals("blocked") && !status.equals("unopened"))
         {
             if (Integer.parseInt(price) > Integer.parseInt(score))
             {
@@ -71,7 +71,7 @@ public class BankCard
             }
             else
             {
-                card.score += price;
+                card.replenish(price);
                 score = Integer.toString(Integer.parseInt(score) - Integer.parseInt(price));
                 return true;
             }
@@ -83,9 +83,9 @@ public class BankCard
     }
     public boolean replenish (String price)
     {
-        if(!status.equals("overdue") || !status.equals("blocked"))
+        if(!status.equals("overdue") && !status.equals("blocked") && !status.equals("unopened"))
         {
-            score += price;
+            score = Integer.toString(Integer.parseInt(score) + Integer.parseInt(price));
             return true;
         }
         else
@@ -102,5 +102,22 @@ public class BankCard
             case (3): status = "unopened";
         }
     }
-
+    public String getId_owner() {
+        return id_owner;
+    }
+    public String getNumberCard() {
+        return numberCard;
+    }
+    public String getCSV() {
+        return CSV;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public String getServiceLife() {
+        return serviceLife;
+    }
+    public String getScore() {
+        return score;
+    }
 }

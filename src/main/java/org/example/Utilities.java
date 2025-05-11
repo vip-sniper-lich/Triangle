@@ -13,7 +13,12 @@ public class Utilities
         }
         long result = 1;
         for (int i = 1; i <= number; i++) {
+            long prev = result;
             result *= i;
+            // Проверка на переполнение
+            if (result / i != prev) {
+                throw new ArithmeticException("Переполнение при вычислении факториала");
+            }
         }
         return result;
     }

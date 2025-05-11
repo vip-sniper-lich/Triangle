@@ -9,22 +9,8 @@ public class Calculator
     {return number1 - number2;}
 
     public static double share(double number1, double number2) {
-        try
-        {
-            if (number2 != 0)
-            {
-                return number1 / number2;
-            }
-            else
-            {
-                throw new IllegalArgumentException("Делитель не должен быть равен 0!!!");
-            }
-        }
-        catch (IllegalArgumentException e)
-        {
-            System.out.println("Ошибка: " + e.getMessage());
-            return 0;
-        }
+        if (number2 != 0) return number1 / number2;
+        else throw new IllegalArgumentException("Делитель не должен быть равен 0!!!");
     }
 
     public static double multiply (double number1, double number2)
@@ -54,7 +40,10 @@ public class Calculator
     }
 
     public static double sqrt (double number1)
-    {return Math.sqrt(number1);}
+    {
+        if (number1 > 0)return Math.sqrt(number1);
+        else throw new IllegalArgumentException("отрицательное число не должно быть в корне");
+    }
 
     public static double abs (double number1)
     {return Math.abs(number1);}
